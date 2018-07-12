@@ -14,7 +14,6 @@ def b(command):
     elif len(args) == 1:
         p1 = subprocess.Popen(args[0], stdout=subprocess.PIPE)
         output = p1.communicate()[0].decode('utf-8')
-        # print(output)
         return output
     else:
         p1 = subprocess.Popen(args[0], stdout=subprocess.PIPE)
@@ -22,7 +21,6 @@ def b(command):
             args[1].split(), stdin=p1.stdout, stdout=subprocess.PIPE)
         p1.stdout.close()
         output = p2.communicate()[0].decode('utf-8')
-        # print(output)
         return output
 
 
@@ -40,28 +38,35 @@ def ls():
     files = b('ls')
     return files
 
+# Generate predictions with new data and pre-trained cooking model
 
-def FT_train_predict():
+
+def FT_predict(validationData):
+    os.chdir(MEDIA_ROOT)
+    predictions = b(f'fasttext predict cooking_model.bin {validationData}')
+    os.chdir(BASE_DIR)
+    return predictions
+
+# Train new fastText classification model and generate predictions
+
+
+def FT_train_predict(trainingData, validationData):
     os.chdir(MEDIA_ROOT)
     # build model
-    b('fasttext supervised -input data.train -output model')
+    b(f'fasttext supervised -input {trainingData} -output model')
     # predictions
-    predictions = b('fasttext predict model.bin data.valid')
+    predictions = b(f'fasttext predict model.bin {validationData}')
     os.chdir(BASE_DIR)
     return predictions
 
 
-# def FT_predict():
-#     os.chdir(MEDIA_ROOT)
-#     # predictions
-#     predictions = b('fasttext predict model.bin data.valid')
-#     return predictions
-#     #b('fasttext test model_cooking.bin cooking.valid')
-
-def FT_predict(filename):
+def FT_predict_string(string):
     os.chdir(MEDIA_ROOT)
-    # predictions
-    predictions = b(f'fasttext predict model.bin {filename}')
+    b('touch newFile.txt')
+    text_file = open("newFile.txt", "w")
+    text_file.write(string)
+    text_file.close()
+    predictions = b(f'fasttext predict cooking_model.bin newFile.txt')
+    b('rm newFile.txt')
     os.chdir(BASE_DIR)
     return predictions
-    #b('fasttext test model_cooking.bin cooking.valid')

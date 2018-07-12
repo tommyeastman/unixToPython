@@ -3,7 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
-from .bashScripts import pwd, countLines, FT_predict, FT_train_predict
+from .bashScripts import pwd, countLines, FT_predict, FT_train_predict, FT_predict_string
 
 
 def index(request):
@@ -19,29 +19,8 @@ def getcwd(request):
     cwd = pwd()
     return render(request, 'api/bashResult.html', {'result': cwd})
 
+# Generate predictions with new data and pre-trained cooking model
 
-def fasttext(request):
-    predictions = FT_train_predict()
-    return render(request, 'api/bashResult.html', {'result': predictions})
-
-
-def upload_file(request):
-    if request.method == 'POST' and request.FILES['myfile']:
-        myfile = request.FILES['myfile']
-        fs = FileSystemStorage()
-        fs.save(myfile.name, myfile)
-        return render(request, 'api/BashResult.html', {'result': "File uploaded successfully"})
-    return render(request, 'api/fileUpload.html')
-
-
-# def generate_new_predictions(request):
-#     if request.method == 'POST' and request.FILES['myfile']:
-#         myfile = request.FILES['myfile']
-#         fs = FileSystemStorage()
-#         fs.save('data.valid', myfile)
-#         predictions = FT_predict()
-#         return render(request, 'api/BashResult.html', {'result': predictions})
-#     return render(request, 'api/fileUpload.html')
 
 def generate_new_predictions(request):
     if request.method == 'POST' and request.FILES['myfile']:
@@ -51,3 +30,31 @@ def generate_new_predictions(request):
         predictions = FT_predict(myfile.name)
         return render(request, 'api/BashResult.html', {'result': predictions})
     return render(request, 'api/generatePredictions.html')
+
+# Generate predictions from text input
+
+
+def generate_predictions_string(request):
+    if request.method == 'POST':
+        string = request.POST['string']
+        predictions = FT_predict_string(string)
+        return render(request, 'api/generatePredictionsString.html', {'result': predictions})
+    return render(request, 'api/generatePredictionsString.html')
+
+# Train new fastText classification model and generate predictions
+
+
+def fasttext(request):
+    modelData = 'cooking.txt'
+    validationData = 'cooking.val'
+    if request.method == 'POST':
+        modelDataFile = request.FILES['modelDataFile']
+        validationDataFile = request.FILES['validationDataFile']
+        fs = FileSystemStorage()
+        fs.save(modelDataFile.name, modelDataFile)
+        fs.save(validationDataFile.name, validationDataFile)
+        modelData = modelDataFile.name
+        validationData = validationDataFile.name
+        predictions = FT_train_predict(modelData, validationData)
+        return render(request, 'api/bashResult.html', {'result': predictions})
+    return render(request, 'api/fastText.html')

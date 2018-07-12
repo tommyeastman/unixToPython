@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>Hello</title>
+  <title>Unix2Python</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
@@ -13,24 +13,55 @@
 </head>
 
 <body>
-  <h2>Fast Text</h2>
-  <h4>How would you like to run the model?</h4>
+  <section>
+    <div class="container">
+      <div class="p5">
+        <h1>Fast Text</h1>
+      </div>
+    </div>
+  </section>
 
-  <ul>
-    <li>
-      <a href="{% url 'api:getcwd' %}">Get current working directory</a>
-    </li>
-    <li>
-      <a href="{% url 'api:countlines' %}">Get number of files in current working directory</a>
-    </li>
-    <li>
-      <a href="{% url 'api:fasttext' %}">Train a fastText classification model and generate predictions for the validation set (warning: this one takes some
-        time)
-      </a>
-    </li>
-  </ul>
-  <img src="https://images.unsplash.com/photo-1531165228670-65ddf39f356a?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=4cc7de315a92b4b399c23288846adbcc&auto=format&fit=crop&w=1950&q=80"
-    width="1600" height="1200">
+  <section>
+    <div class="container">
+      <div class="p5">
+        <form method="post" enctype="multipart/form-data">
+          <div class="p5">
+            <h4>Model</h4>
+            <p>This will train a supervised learning model to assign labels to sentences.</p>
+            <p>Please select labeled data (.txt) to train a new model.</p>
+            {% csrf_token %} Training Data:
+            <input type="file" name="modelDataFile">
+          </div>
+          <br>
+          <div class="p5">
+            <h4>Predictions</h4>
+            <p>Please select an unlabeled set of sentences (.txt) to generate predicted labels.</p>
+            Prediction Data:
+            <input type="file" name="validationDataFile">
+          </div>
+          <br>
+          <div class="p5">
+            <h4>Submit</h4>
+            <p>Train a new model, then generate predictions.</p>
+            <p>Warning: This can take a minute.</p>
+            <button type="submit">Submit</button>
+          </div>
+          <br>
+        </form>
+      </div>
+    </div>
+  </section>
+  <section>
+    <div class="container">
+      <div class="p-5">
+        <p>
+          <a href="{% url 'api:index' %}">Return to home</a>
+        </p>
+      </div>
+    </div>
+  </section>
 
+
+</body>
 
 </html>
