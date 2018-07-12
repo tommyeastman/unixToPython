@@ -45,7 +45,7 @@ User uploads labeled data to train a new model with, along with a .txt file with
 ## How it Works
 As part of the standard Django layout, each URL corresponds to a View, a python function that runs other functions and tells the browser what to render.
 
-Most of the logic of the app exists in bashScripts.py. This contains a python function I created, b(), to parse the Unix command and execute the command in python. Each view calls a separate function in bashScripts.py and those functions may make several calls to b().
+Most of the logic of the app exists in **bashScripts.py**. This contains a python function I created, b(), to parse the Unix command and execute the command in python. Each view calls a separate function in bashScripts.py and those functions may make several calls to b().
 
 The app handles file uploading using standard Django functionality. All uploaded files are stored at /media. The files are grabbed directly from the POST request, rather than creating a form model.
 
