@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>Hello</title>
+  <title>Unix2Python</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
@@ -32,20 +32,15 @@
               <a href="{% url 'api:countlines' %}">Get number of files in current working directory</a>
             </li>
             <li>
-              <a href="{% url 'api:fasttext' %}">Train a fastText classification model and generate predictions for the validation set (warning: this one takes
-                some time)
+              <a href="{% url 'api:generateNewPredictions' %}">Generate new predictions for a pre-trained fastText classification model
               </a>
             </li>
             <li>
-              <a href="{% url 'api:generateNewPredictions' %}">Generate new predictions for a fastText classification model
+              <a href="{% url 'api:fasttext' %}">Train a fastText classification model and generate predictions for the validation set
               </a>
             </li>
             <li>
               <a href="{% url 'api:uploadFile' %}">Upload a file
-              </a>
-            </li>
-            <li>
-              <a href="{% url 'api:ftSinglePage' %}">fastText Single page
               </a>
             </li>
           </ul>

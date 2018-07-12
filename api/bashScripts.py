@@ -14,7 +14,6 @@ def b(command):
     elif len(args) == 1:
         p1 = subprocess.Popen(args[0], stdout=subprocess.PIPE)
         output = p1.communicate()[0].decode('utf-8')
-        # print(output)
         return output
     else:
         p1 = subprocess.Popen(args[0], stdout=subprocess.PIPE)
@@ -22,7 +21,6 @@ def b(command):
             args[1].split(), stdin=p1.stdout, stdout=subprocess.PIPE)
         p1.stdout.close()
         output = p2.communicate()[0].decode('utf-8')
-        # print(output)
         return output
 
 
@@ -41,18 +39,8 @@ def ls():
     return files
 
 
-# def FT_train_predict():
-#     os.chdir(MEDIA_ROOT)
-#     # build model
-#     b('fasttext supervised -input data.train -output model')
-#     # predictions
-#     predictions = b('fasttext predict model.bin data.valid')
-#     os.chdir(BASE_DIR)
-#     return predictions
-
 def FT_predict(validationData):
     os.chdir(MEDIA_ROOT)
-    # predictions
     predictions = b(f'fasttext predict cooking_model.bin {validationData}')
     os.chdir(BASE_DIR)
     return predictions

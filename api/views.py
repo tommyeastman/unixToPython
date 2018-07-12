@@ -20,9 +20,9 @@ def getcwd(request):
     return render(request, 'api/bashResult.html', {'result': cwd})
 
 
-def fasttext(request):
-    predictions = FT_train_predict('cooking.train', 'cooking.valid')
-    return render(request, 'api/bashResult.html', {'result': predictions})
+# def fasttext(request):
+#     predictions = FT_train_predict('cooking.train', 'cooking.valid')
+#     return render(request, 'api/bashResult.html', {'result': predictions})
 
 
 def upload_file(request):
@@ -34,15 +34,6 @@ def upload_file(request):
     return render(request, 'api/fileUpload.html')
 
 
-# def generate_new_predictions(request):
-#     if request.method == 'POST' and request.FILES['myfile']:
-#         myfile = request.FILES['myfile']
-#         fs = FileSystemStorage()
-#         fs.save('data.valid', myfile)
-#         predictions = FT_predict()
-#         return render(request, 'api/BashResult.html', {'result': predictions})
-#     return render(request, 'api/fileUpload.html')
-
 def generate_new_predictions(request):
     if request.method == 'POST' and request.FILES['myfile']:
         myfile = request.FILES['myfile']
@@ -53,28 +44,7 @@ def generate_new_predictions(request):
     return render(request, 'api/generatePredictions.html')
 
 
-# def ftSinglePage(request):
-#     if 'modelData' not in locals():
-#         modelData = 'cooking.txt'
-#     if 'validationData' not in locals():
-#         validationData = 'cooking.val'
-#     if request.method == 'POST' and request.FILES['modelDataFile']:
-#         modelDataFile = request.FILES['modelDataFile']
-#         fs = FileSystemStorage()
-#         fs.save(modelDataFile.name, modelDataFile)
-#         #predictions = FT_predict(myfile.name)
-#         modelData = modelDataFile.name
-#         # return render(request, 'api/fastText.html', {'modelData': modelDataFile.name})
-#     elif request.method == 'POST' and request.FILES['validationDataFile']:
-#         validationDataFile = request.FILES['validationDataFile']
-#         fs = FileSystemStorage()
-#         fs.save(validationDataFile.name, validationDataFile)
-#         #predictions = FT_predict(myfile.name)
-#         validationData = validationDataFile.name
-#         # return render(request, 'api/fastText.html', {'validationData': validationDataFile.name})
-#     return render(request, 'api/fastText.html', {'modelData': modelData, 'validationData': validationData})
-
-def ftSinglePage(request):
+def fasttext(request):
     modelData = 'cooking.txt'
     validationData = 'cooking.val'
     if request.method == 'POST':

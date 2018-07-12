@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>Hello</title>
+  <title>Unix2Python</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
@@ -16,7 +16,8 @@
   <section>
     <div class="container">
       <div class="p-5">
-        <h3>Please select a .txt file to generate predictions from the trained cooking model for each line of the file.</h3>
+        <h3>A FastText classification model has been pre-trained using cooking data.</h3>
+        <h3>Please select an unlabeled set of sentences (.txt) to generate predicted labels.</h3>
       </div>
     </div>
   </section>
@@ -26,8 +27,13 @@
         {% load static %} {% block content %}
         <form method="post" enctype="multipart/form-data">
           {% csrf_token %}
-          <input type="file" name="myfile">
-          <button type="submit">Upload</button>
+          <div class="p-5">
+            <input type="file" name="myfile">
+          </div>
+          <br>
+          <div class="p-5">
+            <button type="submit">Generate Predictions</button>
+          </div>
         </form>
       </div>
     </div>
