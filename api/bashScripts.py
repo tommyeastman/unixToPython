@@ -41,12 +41,27 @@ def ls():
     return files
 
 
-def fastText():
+def FT_train_predict():
     os.chdir(MEDIA_ROOT)
     # build model
     b('fasttext supervised -input data.train -output model')
     # predictions
     predictions = b('fasttext predict model.bin data.valid')
+    os.chdir(BASE_DIR)
     return predictions
 
+
+# def FT_predict():
+#     os.chdir(MEDIA_ROOT)
+#     # predictions
+#     predictions = b('fasttext predict model.bin data.valid')
+#     return predictions
+#     #b('fasttext test model_cooking.bin cooking.valid')
+
+def FT_predict(filename):
+    os.chdir(MEDIA_ROOT)
+    # predictions
+    predictions = b(f'fasttext predict model.bin {filename}')
+    os.chdir(BASE_DIR)
+    return predictions
     #b('fasttext test model_cooking.bin cooking.valid')
