@@ -13,24 +13,39 @@
 </head>
 
 <body>
-  <h2>Fast Text</h2>
-  <h4>How would you like to run the model?</h4>
+  <section>
+    <div class="container">
+      <div class="p5">
+        <h2>Fast Text</h2>
+      </div>
+    </div>
+  </section>
 
-  <ul>
-    <li>
-      <a href="{% url 'api:getcwd' %}">Get current working directory</a>
-    </li>
-    <li>
-      <a href="{% url 'api:countlines' %}">Get number of files in current working directory</a>
-    </li>
-    <li>
-      <a href="{% url 'api:fasttext' %}">Train a fastText classification model and generate predictions for the validation set (warning: this one takes some
-        time)
-      </a>
-    </li>
-  </ul>
-  <img src="https://images.unsplash.com/photo-1531165228670-65ddf39f356a?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=4cc7de315a92b4b399c23288846adbcc&auto=format&fit=crop&w=1950&q=80"
-    width="1600" height="1200">
+  <section>
+    <div class="container">
+      <div class="p5">
+        <form method="post" enctype="multipart/form-data">
+          <h4>Model</h4>
+          <p>Pre-trained cooking model selected by default. You can select labeled data to train a new model.</p>
+          {% csrf_token %} Model Training Data:
+          <input type="file" name="modelDataFile">
+          <br>
+          <h4>Predictions</h4>
+          <p>Cooking model validation data selected by default. You can select any .txt file to generate predictions.</p>
+          Validation Data:
+          <input type="file" name="validationDataFile">
+          <br>
+          <h4>Submit</h4>
+          <p>If you uploaded training data, this will train a new model then generate predictions.</p>
+          <p>If you didn't, this will generate predictions for the pre-trained cooking model.</p>
+          <button type="submit">Submit</button>
+          <br>
+        </form>
+      </div>
+    </div>
+  </section>
 
+
+</body>
 
 </html>

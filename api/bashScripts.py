@@ -41,27 +41,28 @@ def ls():
     return files
 
 
-def FT_train_predict():
-    os.chdir(MEDIA_ROOT)
-    # build model
-    b('fasttext supervised -input data.train -output model')
-    # predictions
-    predictions = b('fasttext predict model.bin data.valid')
-    os.chdir(BASE_DIR)
-    return predictions
-
-
-# def FT_predict():
+# def FT_train_predict():
 #     os.chdir(MEDIA_ROOT)
+#     # build model
+#     b('fasttext supervised -input data.train -output model')
 #     # predictions
 #     predictions = b('fasttext predict model.bin data.valid')
+#     os.chdir(BASE_DIR)
 #     return predictions
-#     #b('fasttext test model_cooking.bin cooking.valid')
 
-def FT_predict(filename):
+def FT_predict(validationData):
     os.chdir(MEDIA_ROOT)
     # predictions
-    predictions = b(f'fasttext predict model.bin {filename}')
+    predictions = b(f'fasttext predict cooking_model.bin {validationData}')
     os.chdir(BASE_DIR)
     return predictions
-    #b('fasttext test model_cooking.bin cooking.valid')
+
+
+def FT_train_predict(trainingData, validationData):
+    os.chdir(MEDIA_ROOT)
+    # build model
+    b(f'fasttext supervised -input {trainingData} -output model')
+    # predictions
+    predictions = b(f'fasttext predict model.bin {validationData}')
+    os.chdir(BASE_DIR)
+    return predictions

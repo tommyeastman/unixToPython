@@ -11,4 +11,5 @@ urlpatterns = [
     path('uploadFile/', views.upload_file, name='uploadFile'),
     path('generateNewPredictions/', views.generate_new_predictions,
          name='generateNewPredictions'),
+    path('ftSinglePage/', views.ftSinglePage, name='ftSinglePage'),
 ]

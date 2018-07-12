@@ -21,7 +21,7 @@ def getcwd(request):
 
 
 def fasttext(request):
-    predictions = FT_train_predict()
+    predictions = FT_train_predict('cooking.train', 'cooking.valid')
     return render(request, 'api/bashResult.html', {'result': predictions})
 
 
@@ -51,3 +51,40 @@ def generate_new_predictions(request):
         predictions = FT_predict(myfile.name)
         return render(request, 'api/BashResult.html', {'result': predictions})
     return render(request, 'api/generatePredictions.html')
+
+
+# def ftSinglePage(request):
+#     if 'modelData' not in locals():
+#         modelData = 'cooking.txt'
+#     if 'validationData' not in locals():
+#         validationData = 'cooking.val'
+#     if request.method == 'POST' and request.FILES['modelDataFile']:
+#         modelDataFile = request.FILES['modelDataFile']
+#         fs = FileSystemStorage()
+#         fs.save(modelDataFile.name, modelDataFile)
+#         #predictions = FT_predict(myfile.name)
+#         modelData = modelDataFile.name
+#         # return render(request, 'api/fastText.html', {'modelData': modelDataFile.name})
+#     elif request.method == 'POST' and request.FILES['validationDataFile']:
+#         validationDataFile = request.FILES['validationDataFile']
+#         fs = FileSystemStorage()
+#         fs.save(validationDataFile.name, validationDataFile)
+#         #predictions = FT_predict(myfile.name)
+#         validationData = validationDataFile.name
+#         # return render(request, 'api/fastText.html', {'validationData': validationDataFile.name})
+#     return render(request, 'api/fastText.html', {'modelData': modelData, 'validationData': validationData})
+
+def ftSinglePage(request):
+    modelData = 'cooking.txt'
+    validationData = 'cooking.val'
+    if request.method == 'POST':
+        modelDataFile = request.FILES['modelDataFile']
+        validationDataFile = request.FILES['validationDataFile']
+        fs = FileSystemStorage()
+        fs.save(modelDataFile.name, modelDataFile)
+        fs.save(validationDataFile.name, validationDataFile)
+        modelData = modelDataFile.name
+        validationData = validationDataFile.name
+        predictions = FT_train_predict(modelData, validationData)
+        return render(request, 'api/bashResult.html', {'result': predictions})
+    return render(request, 'api/fastText.html')
