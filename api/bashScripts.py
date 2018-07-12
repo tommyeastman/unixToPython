@@ -44,9 +44,9 @@ def ls():
 def fastText():
     os.chdir(MEDIA_ROOT)
     # build model
-    b('fasttext supervised -input cooking.train -output model_cooking')
+    b('fasttext supervised -input data.train -output model')
     # predictions
-    predictions = b('fasttext predict model_cooking.bin cooking.valid')
+    predictions = b('fasttext predict model.bin data.valid')
     return predictions
 
     #b('fasttext test model_cooking.bin cooking.valid')
