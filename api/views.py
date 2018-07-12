@@ -6,7 +6,7 @@ from .bashScripts import pwd, countLines, fastText
 
 
 def index(request):
-    return HttpResponse("Hello, world. You're at the home page.")
+    return render(request, 'api/index.html')
 
 
 def countlines(request):
