@@ -1,8 +1,12 @@
 import os
 import subprocess
 
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Function which takes in and executes unix commands and returns their output
+
+
 def b(command):
     args = command.split(" | ")
     if len(args) == 0:
@@ -32,11 +36,17 @@ def countLines():
     return numLines
 
 
+def ls():
+    files = b('ls')
+    return files
+
+
 def fastText():
-    os.chdir("C:\\Users\\abc\\Documents\\Redshred\\fastText-0.1.0")
+    os.chdir(MEDIA_ROOT)
     # build model
     b('fasttext supervised -input cooking.train -output model_cooking')
-    #b('fasttext test model_cooking.bin cooking.valid')
     # predictions
     predictions = b('fasttext predict model_cooking.bin cooking.valid')
     return predictions
+
+    #b('fasttext test model_cooking.bin cooking.valid')
