@@ -50,4 +50,4 @@ def generate_new_predictions(request):
         fs.save(myfile.name, myfile)
         predictions = FT_predict(myfile.name)
         return render(request, 'api/BashResult.html', {'result': predictions})
-    return render(request, 'api/fileUpload.html')
+    return render(request, 'api/generatePredictions.html')

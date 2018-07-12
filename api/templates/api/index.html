@@ -13,32 +13,49 @@
 </head>
 
 <body>
-  <h2>Welcome to the Unix to Python portal.</h2>
-  <h4>Choose from a number of options below to run the Unix commands and get the output in your browser.</h4>
+  <section>
+    <div class="container">
+      <h2>Welcome to the Unix to Python portal.</h2>
+      <h4>Choose from a number of options below to run the Unix commands and get the output in your browser.</h4>
+    </div>
+  </section>
 
-  <ul>
-    <li>
-      <a href="{% url 'api:getcwd' %}">Get current working directory</a>
-    </li>
-    <li>
-      <a href="{% url 'api:countlines' %}">Get number of files in current working directory</a>
-    </li>
-    <li>
-      <a href="{% url 'api:fasttext' %}">Train a fastText classification model and generate predictions for the validation set (warning: this one takes some
-        time)
-      </a>
-    </li>
-    <li>
-      <a href="{% url 'api:generateNewPredictions' %}">Generate new predictions for a fastText classification model
-      </a>
-    </li>
-    <li>
-      <a href="{% url 'api:uploadFile' %}">Upload a file
-      </a>
-    </li>
-  </ul>
-  <img src="https://images.unsplash.com/photo-1531165228670-65ddf39f356a?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=4cc7de315a92b4b399c23288846adbcc&auto=format&fit=crop&w=1950&q=80"
-    width="1600" height="1200">
+  <section>
+    <div class="container">
+      <div class="col">
+        <div class="p-3">
+          <ul>
+            <li>
+              <a href="{% url 'api:getcwd' %}">Get current working directory</a>
+            </li>
+            <li>
+              <a href="{% url 'api:countlines' %}">Get number of files in current working directory</a>
+            </li>
+            <li>
+              <a href="{% url 'api:fasttext' %}">Train a fastText classification model and generate predictions for the validation set (warning: this one takes
+                some time)
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'api:generateNewPredictions' %}">Generate new predictions for a fastText classification model
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'api:uploadFile' %}">Upload a file
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+
+    <img src="https://images.unsplash.com/photo-1531165228670-65ddf39f356a?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=4cc7de315a92b4b399c23288846adbcc&auto=format&fit=crop&w=1950&q=80"
+      width="1600" height="1200">
+
+  </section>
 
 </body>
 
