@@ -38,7 +38,7 @@ def generate_predictions_string(request):
     if request.method == 'POST':
         string = request.POST['string']
         predictions = FT_predict_string(string)
-        return render(request, 'api/BashResult.html', {'result': predictions})
+        return render(request, 'api/generatePredictionsString.html', {'result': predictions})
     return render(request, 'api/generatePredictionsString.html')
 
 # Train new fastText classification model and generate predictions
