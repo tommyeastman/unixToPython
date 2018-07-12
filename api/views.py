@@ -19,19 +19,7 @@ def getcwd(request):
     cwd = pwd()
     return render(request, 'api/bashResult.html', {'result': cwd})
 
-
-# def fasttext(request):
-#     predictions = FT_train_predict('cooking.train', 'cooking.valid')
-#     return render(request, 'api/bashResult.html', {'result': predictions})
-
-
-def upload_file(request):
-    if request.method == 'POST' and request.FILES['myfile']:
-        myfile = request.FILES['myfile']
-        fs = FileSystemStorage()
-        fs.save(myfile.name, myfile)
-        return render(request, 'api/BashResult.html', {'result': "File uploaded successfully"})
-    return render(request, 'api/fileUpload.html')
+# Generate predictions with new data and pre-trained cooking model
 
 
 def generate_new_predictions(request):
@@ -42,6 +30,8 @@ def generate_new_predictions(request):
         predictions = FT_predict(myfile.name)
         return render(request, 'api/BashResult.html', {'result': predictions})
     return render(request, 'api/generatePredictions.html')
+
+# Train new fastText classification model and generate predictions
 
 
 def fasttext(request):

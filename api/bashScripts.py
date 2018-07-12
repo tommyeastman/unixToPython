@@ -38,12 +38,16 @@ def ls():
     files = b('ls')
     return files
 
+# Generate predictions with new data and pre-trained cooking model
+
 
 def FT_predict(validationData):
     os.chdir(MEDIA_ROOT)
     predictions = b(f'fasttext predict cooking_model.bin {validationData}')
     os.chdir(BASE_DIR)
     return predictions
+
+# Train new fastText classification model and generate predictions
 
 
 def FT_train_predict(trainingData, validationData):
