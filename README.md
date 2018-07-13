@@ -25,7 +25,7 @@ http://localhost:8000/api/
 ## FastText
 
 I've used fastText for this app as an example of the machine learning package binding functionality, as
-fastText released originally in Unix without any Python bindings.  All calls to fastText methods are using only Unix.
+fastText was released originally in Unix without any Python bindings.  All calls to fastText methods are using only Unix.
 
 I trained a fastText supervised learning model using data from the cooking section of StackExchange, following along with [the official tutorial](https://fasttext.cc/docs/en/supervised-tutorial.html)
 
@@ -47,6 +47,6 @@ As part of the standard Django layout, each URL corresponds to a View, a python 
 
 Most of the logic of the app exists in **bashScripts.py**. This contains a python function I created, b(), to parse the Unix command and execute the command in python. Each view calls a separate function in bashScripts.py and those functions may make several calls to b().
 
-The app handles file uploading using standard Django functionality. All uploaded files are stored at /media. The files are grabbed directly from the POST request, rather than creating a form model.
+The app handles file uploading using standard Django functionality. All uploaded files are stored at /media. The files are grabbed directly from the POST request.
 
-In the case of #1 and #3 from the fastText functionality listed above, the unix command string is simply passed in the .txt filename using python fstring syntax. In the case of #2, a .txt file is created using Unix, the content of the text input is placed into the file using Python, the model is created using Unix, and the file is then deleted using Python.
+In the case of #1 and #3 from the fastText functionality listed above, the unix command string is simply passed in the .txt filename using python fstring syntax. In the case of #2, a .txt file is created using Unix, the content of the text input is placed into the file using Python, the model is created using Unix, and the file is then deleted using Unix.
