@@ -44,35 +44,32 @@ def ls():
 
 
 def FT_predict(validationData):
-    os.chdir(MEDIA_ROOT)
-    predictions = b(f'fasttext predict cooking_model.bin {validationData}')
-    os.chdir(BASE_DIR)
+    predictions = b(
+        f'fasttext predict {MEDIA_ROOT}/cooking_model.bin {MEDIA_ROOT}/{validationData}')
     return predictions
 
 # Generate predictions from string using pre-trained cooking model
 
 
 def FT_predict_string(string):
-    os.chdir(MEDIA_ROOT)
     # Create new .txt file and write contents of textbox to file
-    b('touch newFile.txt')
-    text_file = open("newFile.txt", "w")
+    b(f'touch {MEDIA_ROOT}/newFile.txt')
+    text_file = open(f'{MEDIA_ROOT}/newFile.txt', 'w')
     text_file.write(string)
     text_file.close()
     # Read file into fastText to create predictions
-    predictions = b(f'fasttext predict cooking_model.bin newFile.txt')
-    b('rm newFile.txt')
-    os.chdir(BASE_DIR)
+    predictions = b(
+        f'fasttext predict {MEDIA_ROOT}/cooking_model.bin {MEDIA_ROOT}/newFile.txt')
+    b(f'rm {MEDIA_ROOT}/newFile.txt')
     return predictions
 
 # Train new fastText classification model and generate predictions
 
 
 def FT_train_predict(trainingData, validationData):
-    os.chdir(MEDIA_ROOT)
     # build model
-    b(f'fasttext supervised -input {trainingData} -output model')
+    b(f'fasttext supervised -input {MEDIA_ROOT}/{trainingData} -output {MEDIA_ROOT}/model')
     # generate predictions
-    predictions = b(f'fasttext predict model.bin {validationData}')
-    os.chdir(BASE_DIR)
+    predictions = b(
+        f'fasttext predict {MEDIA_ROOT}/model.bin {MEDIA_ROOT}/{validationData}')
     return predictions
